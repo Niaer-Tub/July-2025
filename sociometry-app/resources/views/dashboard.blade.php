@@ -5,13 +5,26 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+            @if(Auth::user()->role === 'admin')
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Admin Panel</h2>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><a href="{{ route('admin.questions.index') }}" class="text-blue-600 underline">Manage Questions</a></li>
+                        <li><a href="{{ route('admin.answers.index') }}" class="text-blue-600 underline">View All Answers</a></li>
+                        <li><a href="{{ route('admin.sociogram') }}" class="text-blue-600 underline">View Sociogram</a></li>
+                    </ul>
                 </div>
-            </div>
+            @else
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Welcome, {{ Auth::user()->name }}</h2>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><a href="{{ route('student.questions') }}" class="text-blue-600 underline">Answer Questions</a></li>
+                        <li><a href="{{ route('student.summary') }}" class="text-blue-600 underline">My Answer Summary</a></li>
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

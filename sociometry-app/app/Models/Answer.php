@@ -8,15 +8,15 @@ class Answer extends Model
 {
     protected $fillable = ['question_id', 'user_id'];
 
-    public function question()
-    {
-        return $this->belongsTo(Question::class);
-    }
+public function user()
+{
+    return $this->belongsTo(\App\Models\User::class, 'user_id');
+}
 
-    public function user()
-    {
-        return $this->belongsTo(User::class); // the student who answered
-    }
+public function question()
+{
+    return $this->belongsTo(\App\Models\Question::class, 'question_id');
+}
 
     public function selectedFriends()
     {

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('answers', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('question_id')->constrained()->onDelete('cascade');
-        $table->foreignId('user_id')->constrained()->onDelete('cascade'); // student who answers
-        $table->timestamps();
-    });
+Schema::create('answers', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('question_id')->constrained()->onDelete('cascade');
+    $table->json('selected_names');
+    $table->timestamps();
+});
+
 }
 
 
