@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminController;
 
+use App\Http\Controllers\StudentAnswerController;
+
+// For students to submit answers
+Route::post('/answers', [StudentAnswerController::class, 'store'])->name('student.answers.store');
+
+Route::get('/student/answers', [StudentAnswerController::class, 'index'])->name('student.answers.index');
 
 // Student Routes
 Route::middleware('auth')->group(function () {

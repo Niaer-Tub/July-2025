@@ -1,25 +1,30 @@
 <?php
 
+
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $fillable = ['question_id', 'user_id'];
+    use HasFactory;
 
-public function user()
-{
-    return $this->belongsTo(\App\Models\User::class, 'user_id');
-}
+    protected $fillable = ['user_id', 'question_id', 'friend_id'];
 
-public function question()
-{
-    return $this->belongsTo(\App\Models\Question::class, 'question_id');
-}
-
-    public function selectedFriends()
+    public function user()
     {
-        return $this->belongsToMany(User::class, 'answer_user', 'answer_id', 'friend_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function friend()
+    {
+        return $this->belongsTo(User::class, 'friend_id');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
     }
 }

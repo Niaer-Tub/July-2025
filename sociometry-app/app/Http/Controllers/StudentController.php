@@ -9,14 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
+{   
+public function index()
 {
-    public function index()
-    {
-        $questions = Question::all();
-        $users = User::where('role', 'student')->where('id', '!=', Auth::id())->get();
+    $questions = Question::all();
+    $students = User::where('role', 'student')->get();
 
-        return view('student.questions', compact('questions', 'users'));
-    }
+    return view('student.questions', compact('questions', 'students'));
+}
+
 
     public function store(Request $request)
     {
