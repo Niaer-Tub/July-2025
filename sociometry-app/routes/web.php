@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentAnswerController;
 
 // For students to submit answers
 Route::post('/answers', [StudentAnswerController::class, 'store'])->name('student.answers.store');
+Route::post('/student/answers', [StudentAnswerController::class, 'store'])->name('student.answers.store');
 
 Route::get('/student/answers', [StudentAnswerController::class, 'index'])->name('student.answers.index');
 
