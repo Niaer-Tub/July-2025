@@ -25,6 +25,16 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin Routes
+
+
+// Questions Management
+Route::get('/admin/questions', [AdminController::class, 'index'])->name('questions.index');
+Route::get('/admin/questions/create', [AdminController::class, 'createQuestion'])->name('questions.create');
+Route::post('/admin/questions', [AdminController::class, 'storeQuestion'])->name('questions.store');
+Route::get('/admin/questions/{question}/edit', [AdminController::class, 'editQuestion'])->name('questions.edit');
+Route::put('/admin/questions/{question}', [AdminController::class, 'updateQuestion'])->name('questions.update');
+Route::delete('/admin/questions/{question}', [AdminController::class, 'deleteQuestion'])->name('questions.delete');
+
 Route::middleware('auth')->group(function () {
     // Admin: Manage questions
     Route::get('/admin/questions', [AdminController::class, 'index'])->name('admin.questions.index');

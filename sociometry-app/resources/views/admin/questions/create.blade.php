@@ -10,7 +10,7 @@
                 <label class="block font-bold mb-2">Isi Pertanyaan</label>
                 <textarea name="text" rows="4" class="w-full border px-4 py-2 rounded" required></textarea>
             </div>
-            <button class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
+            <button class="bg-blue-600 text-black px-4 py-2 rounded">Simpan</button>
         </form>
     </div>
 </x-app-layout>
