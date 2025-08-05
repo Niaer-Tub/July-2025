@@ -73,7 +73,7 @@ public function sociogram()
     {
         $request->validate(['text' => 'required|string']);
         $question->update(['text' => $request->text]);
-        return redirect('/admin')->with('success', 'Question updated');
+        return redirect('/dashboard')->with('success', 'Question updated');
     }
 
     public function deleteQuestion(Question $question)
