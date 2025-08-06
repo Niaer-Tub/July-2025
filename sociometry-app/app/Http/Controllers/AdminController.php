@@ -84,7 +84,8 @@ public function sociogram()
 
     public function viewAnswers()
     {
-        $answers = Answer::with('user', 'question', 'selectedFriends')->get();
+        $answers = Answer::with(['user', 'question'])->get(); // ← Add this line
+
         return view('admin.answers', compact('answers'));
     }
 
