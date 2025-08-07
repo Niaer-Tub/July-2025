@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
     // Admin: View all student answers
     Route::get('/admin/answers', [AdminController::class, 'answers'])->name('admin.answers.index');
-
+       Route::get('/answer', [AdminController::class, 'answer'])->name('admin.answers');
     // Admin: View sociogram (interactive)
     Route::get('/admin/sociogram', [AdminController::class, 'sociogram'])->name('admin.sociogram');
 });
