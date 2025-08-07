@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
-{   
+{
 public function index()
 {
     $questions = Question::all();
@@ -20,19 +20,19 @@ public function index()
 
 
     public function store(Request $request)
-    {
-        $studentId = Auth::id();
+{
+    $user = Auth::user(); // Get the logged-in student
 
-        foreach ($request->answers as $questionId => $friendIds) {
-            $answer = Answer::updateOrCreate(
-                ['question_id' => $questionId, 'user_id' => $studentId]
-            );
-
-            $answer->selectedFriends()->sync($friendIds);
-        }
-
-        return redirect()->route('student.summary')->with('success', 'Jawaban disimpan.');
+    foreach ($request->answers as $questionId => $names) {
+        Answer::create([
+            'user_id' => $user->id,
+            'question_id' => $questionId,
+            'selected_names' => json_encode($names),
+        ]);
     }
+
+    return redirect()->route('student.answers.index')->with('success', 'Jawaban berhasil dikirim!');
+}
 
     public function summary()
     {
