@@ -11,6 +11,7 @@ Route::post('/answers', [StudentAnswerController::class, 'store'])->name('studen
 Route::post('/student/answers', [StudentAnswerController::class, 'store'])->name('student.answers.store');
 
 Route::get('/student/answers', [StudentAnswerController::class, 'index'])->name('student.answers.index');
+Route::post('/student/answers/store', [StudentController::class, 'store'])->name('student.answers.store');
 
 // Student Routes
 Route::middleware('auth')->group(function () {

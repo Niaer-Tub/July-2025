@@ -33,7 +33,6 @@ public function index()
 
     return redirect()->route('student.answers.index')->with('success', 'Jawaban berhasil dikirim!');
 }
-
     public function summary()
     {
         $answers = Answer::where('user_id', Auth::id())->with('question', 'selectedFriends')->get();
