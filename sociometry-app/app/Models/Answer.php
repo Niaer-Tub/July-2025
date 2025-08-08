@@ -11,7 +11,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'question_id', 'friend_id'];
+    protected $fillable = ['user_id', 'question_id', 'selected_names'];
 
     public function user()
     {
