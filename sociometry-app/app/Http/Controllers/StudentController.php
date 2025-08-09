@@ -34,9 +34,12 @@ public function index()
     return redirect()->route('dashboard')->with('success', 'Jawaban berhasil dikirim!');
 }
     public function summary()
-    {
-        $answers = Answer::where('user_id', Auth::id())->with('question', 'selectedFriends')->get();
+{
+    $answers = Answer::where('user_id', Auth::id())
+        ->with('question')
+        ->get();
 
-        return view('student.summary', compact('answers'));
-    }
+    return view('student.summary', compact('answers'));
+}
+    
 }

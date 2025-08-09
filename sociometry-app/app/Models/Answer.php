@@ -13,6 +13,8 @@ class Answer extends Model
 
     protected $fillable = ['user_id', 'question_id', 'selected_names'];
 
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,6 +24,13 @@ class Answer extends Model
     {
         return $this->belongsTo(User::class, 'friend_id');
     }
+    public function selectedFriends()
+{
+    // selected_names is stored as an array of names, so we map them to User objects
+    return $this->belongsToMany(User::class, 'users', 'id', 'id')
+        ->whereIn('name', json_decode($this->selected_names, true) ?? []);
+}
+
 
     public function question()
     {

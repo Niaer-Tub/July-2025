@@ -27,30 +27,32 @@ public function index()
         'students' => $students
     ]);
 }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'question_id' => 'required|exists:questions,id',
-            'selected_students' => 'required|array|min:1|max:5',
-            'selected_students.*' => 'exists:users,id',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'question_id' => 'required|exists:questions,id',
+        'selected_students' => 'required|array|min:1|max:5',
+        'selected_students.*' => 'exists:users,id',
+    ]);
 
-        $user = Auth::user();
+    $user = Auth::user();
 
-        // Delete old answers from this student for the question
-        Answer::where('user_id', $user->id)
-            ->where('question_id', $request->question_id)
-            ->delete();
+    // Get the names of selected friends
+    $selectedNames = User::whereIn('id', $request->selected_students)
+                         ->pluck('name')
+                         ->toArray();
 
-        // Store new answers
-        foreach ($request->selected_students as $friend_id) {
-            Answer::create([
-                'user_id' => $user->id,
-                'question_id' => $request->question_id,
-                'friend_id' => $friend_id,
-            ]);
-        }
+    // Save or update in one row
+    Answer::updateOrCreate(
+        [
+            'user_id' => $user->id,
+            'question_id' => $request->question_id
+        ],
+        [
+            'selected_names' => json_encode($selectedNames)
+        ]
+    );
 
-        return redirect()->back()->with('success', 'Jawaban berhasil disimpan.');
-    }
+    return redirect()->back()->with('success', 'Jawaban berhasil disimpan.');
+}
 }
