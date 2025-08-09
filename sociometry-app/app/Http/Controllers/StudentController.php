@@ -21,7 +21,7 @@ public function index()
 
     public function store(Request $request)
 {
-    $user = Auth::user(); // Get the logged-in student
+    $user = Auth::user();
 
     foreach ($request->answers as $questionId => $names) {
         Answer::create([
@@ -31,7 +31,7 @@ public function index()
         ]);
     }
 
-    return redirect()->route('student.answers.index')->with('success', 'Jawaban berhasil dikirim!');
+    return redirect()->route('dashboard')->with('success', 'Jawaban berhasil dikirim!');
 }
     public function summary()
     {
