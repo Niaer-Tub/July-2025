@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/questions', [StudentController::class, 'store'])->name('student.questions.store');
 
     // Student: View their answers summary
-    Route::get('/my-answers', [StudentController::class, 'summary'])->name('student.summary');
+    Route::get('/summary', [StudentController::class, 'summary'])->name('student.summary');
 });
 
 // Admin Routes
