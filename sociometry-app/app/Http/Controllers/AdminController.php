@@ -22,10 +22,16 @@ class AdminController extends Controller
 
 public function answers()
 {
-    $answers = \App\Models\Answer::with(['user', 'question'])->get();
+    $answers = Answer::with(['user', 'question'])->get();
+
+    // Decode selected_names into arrays for easy display
+    foreach ($answers as $answer) {
+        $answer->selected_names_array = json_decode($answer->selected_names, true) ?? [];
+    }
 
     return view('admin.answers.index', compact('answers'));
 }
+
 
 
 
